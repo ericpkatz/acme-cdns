@@ -18,7 +18,10 @@ dataPromise.then( results => {
 });
 
 const renderNav = (results)=> {
-  const { products, companies } = results;
+  //const { products, companies } = results;
+  const products = results.products;
+  const companies = results.companies;
+
   const html = `
     <li class='nav-item'>
       <a class='nav-link' href='#products'>
@@ -35,5 +38,16 @@ const renderNav = (results)=> {
 };
 
 window.addEventListener('hashchange', ()=> {
-  dataPromise.then( results => console.log(results));
+  const hash = window.location.hash.slice(1);
+  dataPromise.then( results => {
+    const products = results.products;
+    const companies = results.companies;
+    if(hash === 'companies'){
+      console.log(companies);
+
+    }
+    else if (hash === 'products'){
+      console.log(products);
+    }
+  })
 });
